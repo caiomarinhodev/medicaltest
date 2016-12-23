@@ -3,7 +3,6 @@ from datetime import date
 from django.db import models
 from django.contrib.auth.models import User
 
-
 INSURANCES = (
     (0, "N/A"),
     (1, "Aetna"),
@@ -19,16 +18,26 @@ INSURANCES = (
 )
 
 US_STATES = (
-    ("Alabama", "Alabama"), ("Alaska", "Alaska"), ("Arizona", "Arizona"), ("Arkansas", "Arkansas"), ("California", "California"),
-    ("Colorado", "Colorado"), ("Connecticut", "Connecticut"), ("Delaware", "Delaware"), ("Florida", "Florida"), ("Georgia", "Georgia"),
-    ("Hawaii", "Hawaii"), ("Idaho", "Idaho"), ("Illinois", "Illinois"), ("Indiana", "Indiana"), ("Iowa", "Iowa"),
-    ("Kansas", "Kansas"), ("Kentucky", "Kentucky"), ("Louisiana", "Louisiana"), ("Maine", "Maine"), ("Maryland", "Maryland"),
-    ("Massachusetts", "Massachusetts"), ("Michigan", "Michigan"), ("Minnesota", "Minnesota"), ("Mississippi", "Mississippi"), ("Missouri", "Missouri"),
-    ("Montana", "Montana"), ("Nebraska", "Nebraska"), ("Nevada", "Nevada"), ("New Hampshire", "New Hampshire"), ("New Jersey", "New Jersey"),
-    ("New Mexico", "New Mexico"), ("New York", "New York"), ("North Carolina", "North Carolina"), ("North Dakota", "North Dakota"), ("Ohio", "Ohio"),
-    ("Oklahoma", "Oklahoma"), ("Oregon", "Oregon"), ("Pennsylvania", "Pennsylvania"), ("Rhode Island", "Rhode Island"), ("South Carolina", "South Carolina"),
-    ("South Dakota", "South Dakota"), ("Tennessee", "Tennessee"), ("Texas", "Texas"), ("Utah", "Utah"), ("Vermont", "Vermont"),
-    ("Virginia", "Virginia"), ("Washington", "Washington"), ("West Virginia", "West Virginia"), ("Wisconsin", "Wisconsin"), ("Wyoming", "Wyoming")
+    ("Alabama", "Alabama"), ("Alaska", "Alaska"), ("Arizona", "Arizona"),
+    ("Arkansas", "Arkansas"), ("California", "California"),
+    ("Colorado", "Colorado"), ("Connecticut", "Connecticut"), ("Delaware", "Delaware"),
+    ("Florida", "Florida"), ("Georgia", "Georgia"),
+    ("Hawaii", "Hawaii"), ("Idaho", "Idaho"), ("Illinois", "Illinois"), ("Indiana", "Indiana"),
+    ("Iowa", "Iowa"),
+    ("Kansas", "Kansas"), ("Kentucky", "Kentucky"), ("Louisiana", "Louisiana"),
+    ("Maine", "Maine"), ("Maryland", "Maryland"),
+    ("Massachusetts", "Massachusetts"), ("Michigan", "Michigan"), ("Minnesota", "Minnesota"),
+    ("Mississippi", "Mississippi"), ("Missouri", "Missouri"),
+    ("Montana", "Montana"), ("Nebraska", "Nebraska"), ("Nevada", "Nevada"),
+    ("New Hampshire", "New Hampshire"), ("New Jersey", "New Jersey"),
+    ("New Mexico", "New Mexico"), ("New York", "New York"),
+    ("North Carolina", "North Carolina"), ("North Dakota", "North Dakota"), ("Ohio", "Ohio"),
+    ("Oklahoma", "Oklahoma"), ("Oregon", "Oregon"), ("Pennsylvania", "Pennsylvania"),
+    ("Rhode Island", "Rhode Island"), ("South Carolina", "South Carolina"),
+    ("South Dakota", "South Dakota"), ("Tennessee", "Tennessee"), ("Texas", "Texas"),
+    ("Utah", "Utah"), ("Vermont", "Vermont"),
+    ("Virginia", "Virginia"), ("Washington", "Washington"), ("West Virginia", "West Virginia"),
+    ("Wisconsin", "Wisconsin"), ("Wyoming", "Wyoming")
 )
 
 
@@ -86,8 +95,10 @@ class Profile(models.Model):
     allergies = models.CharField(blank=True, max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     prefHospital = models.ForeignKey(Hospital, null=True, related_name="profiles_prefhospital")
-    linkedEmergencyContact = models.ForeignKey('Account', null=True, related_name="profiles_contact")
-    primaryCareDoctor = models.ForeignKey('Account', null=True, related_name="profiles_primarycaredoctor")
+    linkedEmergencyContact = models.ForeignKey('Account', null=True,
+                                               related_name="profiles_contact")
+    primaryCareDoctor = models.ForeignKey('Account', null=True,
+                                          related_name="profiles_primarycaredoctor")
 
     def get_populated_fields(self):
         """
@@ -293,7 +304,6 @@ class Notification(models.Model):
 
 
 class Admission(models.Model):
-
     ADMISSIONREASON = (
         ('Pneumonia', "Pneumonia"),
         ('Congestive Heart Failure', "Congestive Heart Failure"),
@@ -303,12 +313,14 @@ class Admission(models.Model):
         ('Stroke', "Stroke"),
         ('Irregular Heartbeat', "Irregular Heartbeat"),
         ('Congestive Heart Failure', "Congestive Heart Failure"),
-        ('Complications of procedures, devices, implants and grafts', "Complications of procedures, devices, implants and grafts"),
+        ('Complications of procedures, devices, implants and grafts',
+         "Complications of procedures, devices, implants and grafts"),
         ('Mood Disorders', "Mood Disorders"),
         ('Fluid and Electrolyte Disorders', "Fluid and Electrolyte Disorders"),
         ('Urinary Infections', "Urinary Infections"),
         ('Asthma', "Asthma"),
-        ('Diabetes mellitus with and without complications', "Diabetes mellitus with and without complications"),
+        ('Diabetes mellitus with and without complications',
+         "Diabetes mellitus with and without complications"),
         ('Skin Infections', "Skin Infections"),
         ('Gallbladder Disease', "Gallbladder Disease"),
         ('Gastrointestinal Bleeding', "Gastrointestinal Bleeding"),
@@ -336,7 +348,7 @@ class Prescription(models.Model):
     refill = models.IntegerField()
     active = models.BooleanField(default=True)
 
-    
+
 class MedicalInfo(models.Model):
     BLOOD = (
         ('A+', 'A+ Type'),
@@ -414,6 +426,7 @@ class MedicalTest(models.Model):
             'image5': self.image5,
         }
         return fields
+
 
 class Statistics(models.Model):
     startDate = models.DateField()

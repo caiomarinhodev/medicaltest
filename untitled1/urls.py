@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include, patterns
 from django.contrib import admin
 
-admin.autodiscover()
+from api import urls as api_urls
 
 urlpatterns = patterns('',
                        # Examples:
@@ -24,4 +24,7 @@ urlpatterns = patterns('',
                        # url(r'^blog/', include('blog.urls')),
                        url(r'^', include('app.urls', namespace="healthnet")),
                        url(r'^admin/', include(admin.site.urls)),
+                       url(r'^api/', include(api_urls)),
+                       url(r'^api-auth/',
+                           include('rest_framework.urls', namespace='rest_framework'))
                        )
